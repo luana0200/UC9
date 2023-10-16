@@ -20,7 +20,7 @@ export default function Login() {
                         type="password" />
                     <button>Enviar</button>
                 </form>
-                <p>Para se Cadastrar clique <Link to='/Login'>AQUI</Link></p>
+                <p>Para se cadastrar clique <Link to='/Login'>AQUI</Link></p>
             </div>
 
         </div>

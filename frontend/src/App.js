@@ -3,7 +3,7 @@ import './App.scss'
 
 function App() {
   return (
-    <div >
+    <div className='container-fluid'>
       <Rotas />
     </div>
   )

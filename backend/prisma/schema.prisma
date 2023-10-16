@@ -1,0 +1,23 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Usuario {
+  id    String @id @default(uuid())
+  nome  String
+  email String
+  senha String
+
+  create_at DateTime? @default(now()) //o DateTime? onde o ? representa que um campo que pode ser null
+  update_at DateTime? @default(now())
+
+  @@map("usuarios")
+}
