@@ -1,8 +1,19 @@
+import React, { useState } from 'react'
 import 'react-dom'
 import { Link } from 'react-router-dom'
 import './inicio.estilo.scss'
 
 export default function Login() {
+
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+
+    async function handleLogin(e) {
+        e.preventDefault()
+        console.log(email, password)
+
+    }
+
     return (
         <div>
             <div className='loginInicio'>
@@ -10,17 +21,21 @@ export default function Login() {
             </div>
 
             <div className='formInicio'>
-                <form>
+                <form onSubmit={handleLogin}>
                     <label>Email:</label>
                     <input
-                        type="text" />
+                        type="text"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)} />
 
                     <label>Senha:</label>
                     <input
-                        type="password" />
-                    <button>Enviar</button>
+                        type="password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)} />
+                    <button type='submit'>Enviar</button>
                 </form>
-                <p>Para se cadastrar clique <Link to='/Login'>AQUI</Link></p>
+                <p>Para se cadastrar clique <Link to='/CriarUsuarios'>AQUI</Link></p>
             </div>
 
         </div>
