@@ -5,7 +5,7 @@ import { CriarUsuariosController } from './controller/Usuarios/CriarUuariosContr
 const router = Router()
 
 //Login
-router.post('/Login', new LoginController().handle)
+router.post('/LoginUsuarios', new LoginController().handle)
 
 //usuarios
 router.post('/CriarUsuarios', new CriarUsuariosController().handle)
