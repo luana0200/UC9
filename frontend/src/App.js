@@ -1,12 +1,15 @@
 import Rotas from './routes'
 import './App.scss'
+import  AuthProvider  from './Contexts/AuthContext'
 
-function App() {
+export default function App() {
   return (
-    <div className='container-fluid'>
-      <Rotas />
-    </div>
+    <AuthProvider>
+      <div className='container-fluid'>
+        <Rotas />
+      </div>
+    </AuthProvider>
   )
 }
 
-export default App;
+

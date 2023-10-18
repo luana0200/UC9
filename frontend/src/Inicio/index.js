@@ -1,12 +1,14 @@
-import React, { useState } from 'react'
-import 'react-dom'
+import React, { useState, useContext } from 'react'
 import { Link } from 'react-router-dom'
+import { AuthContext } from '../Contexts/AuthContext'
 import './inicio.estilo.scss'
 
 export default function Login() {
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+
+    const { signIn } = useContext(AuthContext)
 
     async function handleLogin(e) {
         e.preventDefault()
