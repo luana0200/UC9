@@ -1,10 +1,12 @@
 import React, { useState, useContext } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
 import { AuthContext } from '../Contexts/AuthContext'
 import './inicio.estilo.scss'
 
 export default function Login() {
 
+    const navigation = useNavigate()
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
@@ -12,8 +14,21 @@ export default function Login() {
 
     async function handleLogin(e) {
         e.preventDefault()
-        console.log(email, password)
+        let data = { email, password }
 
+        const resposta = await signIn(data)
+        // const token = resposta.data.token
+        // localStorage.setItem('@tklogin2023', JSON.stringify(token)) //stringify= para converter em string
+
+        if (!resposta) {
+            toast.error('Erro de Login')
+            return
+        } else if (resposta.status === 200) {
+            const token = resposta.data.token
+            localStorage.setItem('@tklogin2023', JSON.stringify(token)) //stringify= para converter em string
+            toast.success('Login Efetuado com Sucesso')
+            navigation('/Dashboard')
+        }
     }
 
     return (

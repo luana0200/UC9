@@ -20,6 +20,7 @@ export default function AuthProvider({ children }) {
                 email, password
             })
 
+            const token = localStorage.setItem('@tklogin2023', JSON.stringify(resposta.data.token))
             return resposta
 
         } catch (err) {
