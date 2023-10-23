@@ -21,3 +21,31 @@ model Usuario {
 
   @@map("usuarios")
 }
+
+model Produtos {
+  id         String    @id @default(uuid())
+  nome       String
+  fabricante String
+  quantidade String
+  preco      String
+  banner     String
+  create_at  DateTime? @default(now())
+  updare_at  DateTime? @default(now())
+
+  categorias   Categorias @relation(fields: [categoriasId], references: [id])
+  categoriasId String
+
+  @@map("produtos")
+}
+
+model Categorias {
+  id   String @id @default(uuid())
+  nome String
+
+  create_at DateTime? @default(now())
+  update_at DateTime? @default(now())
+
+  produtos Produtos[]
+
+  @@map("categorias")
+}
