@@ -36,7 +36,8 @@ class CriarProdutosServices {
             }
         })
 
-        console.log(produtos)
+        return produtos
+
     }
 }
 
