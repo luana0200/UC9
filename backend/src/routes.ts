@@ -2,7 +2,7 @@ import { Router } from 'express'
 import multer from 'multer'
 import uploadConfig from './config/multer'
 
-import { isAutenticado } from '../middleware/isAutenticado'
+import { isAutenticado } from './middleware/isAutenticado'
 
 import { CriarCategoriasController } from './controller/Categorias/CriarCategoriasController'
 import { CriarProdutosController } from './controller/Produtos/CriarProdutosController'
@@ -24,7 +24,7 @@ router.post('/CriarUsuarios', new CriarUsuariosController().handle)
 
 //categorias
 router.post('/CriarCategorias', isAutenticado, new CriarCategoriasController().handle)
-router.get('/ListarCategorias', isAutenticado, new ListarCategoriasController().handle)
+router.get('/ListarCategorias', new ListarCategoriasController().handle)
 
 //produtos
 router.post('/CriarProdutos', isAutenticado, upload.single('file'), new CriarProdutosController().handle)
