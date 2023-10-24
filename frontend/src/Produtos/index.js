@@ -5,6 +5,13 @@ import './produto.estilo.scss'
 export default function Produtos() {
 
     const [categorias, setCategorias] = useState([''])
+    const [idCategoria, setIdCategoria] = useState('')
+
+    const [nome, setNome] = useState('')
+    const [fabricante, setFabricante] = useState('')
+    const [quantidade, setQuantidade] = useState('')
+    const [preco, setPreco] = useState('')
+
 
     useEffect(() => {
         async function listarCategorias() {
@@ -15,6 +22,12 @@ export default function Produtos() {
         listarCategorias()
     }, [categorias])
 
+    async function handleCadastro(e) {
+        e.preventDefault()
+        console.log(nome, fabricante, quantidade, preco)
+        console.log(idCategoria)
+    }
+
     return (
         <div className='containerProdutosCadastro'>
             <div>
@@ -22,27 +35,48 @@ export default function Produtos() {
             </div>
 
             <div>
-                <form>
-                    <select >
+                <form onSubmit={handleCadastro}>
+                    <select
+                        value={idCategoria}
+                        onChange={(e) => setIdCategoria(e.target.value)}>
+
                         <option >Selecione...</option>
-                        {categorias.map((categorias) => {
+                        {categorias.map((item) => { //mapear os seus itens
                             return (
-                                <option >{categorias.nome}</option>
+                                <option value={item.id} key={item.id} >{item.nome}</option>
                             )
                         })}
+
+
                     </select>
 
                     <label>Nome:</label>
                     <input type='text'
+                        value={nome}
+                        onChange={(e) => setNome(e.target.value)}
                     />
                     <label>Fabricante:</label>
-                    <input type='text' />
+                    <input type='text'
+                        value={fabricante}
+                        onChange={(e) => setFabricante(e.target.value)}
+                    />
                     <label>Quantidade:</label>
-                    <input type='text' />
+                    <input type='text'
+                        value={quantidade}
+                        onChange={(e) => setQuantidade(e.target.value)}
+                    />
                     <label>Preço:</label>
-                    <input type='text' />
+                    <input type='text'
+                        value={preco}
+                        onChange={(e) => setPreco(e.target.value)}
+                    />
                     <label>Imagem:</label>
-                    <input type='file' />
+                    <input
+                        type='file'
+                    />
+
+                    <br />
+                    <button type='submit'>Enviar</button>
 
                 </form>
             </div>
