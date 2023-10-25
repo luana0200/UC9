@@ -10,7 +10,7 @@ class CriarProdutosController {
         } else {
             const { originalname, filename: banner } = req.file
             const criarProdutosServices = new CriarProdutosServices()
-            const resposta = await criarProdutosServices.execute({
+            const responder = await criarProdutosServices.execute({
                 nome,
                 fabricante,
                 quantidade,
@@ -19,7 +19,7 @@ class CriarProdutosController {
                 categoriasId
             })
 
-            return res.json(resposta)
+            return res.json(responder)
         }
     }
 }

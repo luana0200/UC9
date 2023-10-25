@@ -24,7 +24,7 @@ router.post('/CriarUsuarios', new CriarUsuariosController().handle)
 
 //categorias
 router.post('/CriarCategorias', isAutenticado, new CriarCategoriasController().handle)
-router.get('/ListarCategorias', new ListarCategoriasController().handle)
+router.get('/ListarCategorias', isAutenticado,  new ListarCategoriasController().handle)
 
 //produtos
 router.post('/CriarProdutos', isAutenticado, upload.single('file'), new CriarProdutosController().handle)

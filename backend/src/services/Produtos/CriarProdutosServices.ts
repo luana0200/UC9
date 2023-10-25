@@ -25,7 +25,7 @@ class CriarProdutosServices {
             throw new Error('Este Nome já esta Cadastrado')
         }
 
-        const produtos = await prismaClient.produtos.create({
+        await prismaClient.produtos.create({
             data: {
                 nome: nome,
                 fabricante: fabricante,
@@ -36,8 +36,7 @@ class CriarProdutosServices {
             }
         })
 
-        return produtos
-
+        return { dados: 'Cadastro Efetuado com Sucesso' }
     }
 }
 
