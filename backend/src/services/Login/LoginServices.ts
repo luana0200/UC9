@@ -6,6 +6,7 @@ interface LoginUsuarios {
     email: string
     password: string
 }
+
 class LoginServices {
     async execute({ email, password }: LoginUsuarios) {
         const usuario = await prismaClient.usuario.findFirst({
@@ -31,7 +32,7 @@ class LoginServices {
             process.env.JWT_SECRET, //jwt_secret vem da hash do env
             {
                 subject: usuario.id,
-                expiresIn: '1h'
+                expiresIn: '24h'
             }
         )
 

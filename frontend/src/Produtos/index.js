@@ -17,19 +17,30 @@ export default function Produtos() {
     const iToken = localStorage.getItem('@tklogin2023')  // pegando o token
     const token = JSON.parse(iToken)
 
-
     useEffect(() => {
         async function listarCategorias() {
             const resposta = await apiLocal.get('/ListarCategorias', {
-                headers:{
+                headers: {
                     Authorization: 'Bearer ' + `${token}`
-                    
                 }
             })
             setCategorias(resposta.data) // retorna oq esta dentro de DATA
         }
         listarCategorias()
     }, [categorias])
+
+    function handleImagem(e) {
+        e.preventDefault()
+        if (!e.target.files) {
+            // console.log('Sem Arquivo')
+            return
+        }
+        const image = e.target.files[0]
+        if (image.type === 'image/png' || image.type === 'image/jpeg') {
+            setImagem(image)
+        }
+
+    }
 
     async function handleCadastro(e) {
         try {
@@ -51,21 +62,11 @@ export default function Produtos() {
         } catch (err) {
             console.log(err)
         }
-    }
-
-
-
-    function handleImagem(e) {
-        e.preventDefault()
-        if (!e.target.files) {
-            // console.log('Sem Arquivo')
-            return
-        }
-        const image = e.target.files[0]
-        if (image.type === 'image/png' || image.type === 'image/jpeg') {
-            setImagem(image)
-        }
-
+        setNome('')
+        setFabricante('')
+        setQuantidade('')
+        setPreco('')
+        setImagem(null)
     }
 
     return (
@@ -86,8 +87,6 @@ export default function Produtos() {
                                 <option value={item.id} key={item.id} >{item.nome}</option>
                             )
                         })}
-
-
                     </select>
 
                     <label>Nome:</label>
@@ -113,6 +112,7 @@ export default function Produtos() {
                     <label>Imagem:</label>
                     <input
                         type='file'
+                        value={setImagem}
                         accept='image/jpeg, image/png'
                         // onChange={(e) => setImagem  (e.target.files)}
                         onChange={handleImagem}
