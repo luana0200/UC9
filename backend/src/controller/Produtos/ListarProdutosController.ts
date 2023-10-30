@@ -7,7 +7,9 @@ class ListarProdutosController {
         const listarProutosServices = new ListarProdutosServices()
         const response = await listarProutosServices.execute()
 
+       
         return res.json(response)
+
     }
 }
 

@@ -29,20 +29,20 @@ export default function Produtos() {
         listarCategorias()
     }, [categorias])
 
-    function handleImagem(e) {
-        e.preventDefault()
-        if (!e.target.files) {
-            // console.log('Sem Arquivo')
+
+    function handleImagem(e){
+        if(!e.target.files){
             return
         }
         const image = e.target.files[0]
-        if (image.type === 'image/png' || image.type === 'image/jpeg') {
+        if(image.type === 'image/png' || image.type === 'image/jpeg'){
             setImagem(image)
         }
-
     }
 
     async function handleCadastro(e) {
+
+
         try {
             e.preventDefault()
             const categoriaId = idCategoria
@@ -55,18 +55,22 @@ export default function Produtos() {
             data.append('categoriasId', categoriaId)
             data.append('file', imagem)
 
-            const resposta = await apiLocal.post('/CriarProdutos', data)
-            // console.log(resposta)
+            const resposta = await apiLocal.post('/CriarProdutos', data, {
+
+            })
             toast.success(resposta.data.dados)
-            window.location.reload()
+
         } catch (err) {
             console.log(err)
         }
+
         setNome('')
         setFabricante('')
         setQuantidade('')
         setPreco('')
         setImagem(null)
+
+
     }
 
     return (
@@ -109,12 +113,12 @@ export default function Produtos() {
                         value={preco}
                         onChange={(e) => setPreco(e.target.value)}
                     />
+                    
                     <label>Imagem:</label>
                     <input
-                        type='file'
+                        type="file"
                         value={setImagem}
                         accept='image/jpeg, image/png'
-                        // onChange={(e) => setImagem  (e.target.files)}
                         onChange={handleImagem}
                     />
 
