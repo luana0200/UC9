@@ -30,19 +30,17 @@ export default function Produtos() {
     }, [categorias])
 
 
-    function handleImagem(e){
-        if(!e.target.files){
+    function handleImagem(e) {
+        if (!e.target.files) {
             return
         }
         const image = e.target.files[0]
-        if(image.type === 'image/png' || image.type === 'image/jpeg'){
+        if (image.type === 'image/png' || image.type === 'image/jpeg') {
             setImagem(image)
         }
     }
 
     async function handleCadastro(e) {
-
-
         try {
             e.preventDefault()
             const categoriaId = idCategoria
@@ -58,10 +56,12 @@ export default function Produtos() {
             const resposta = await apiLocal.post('/CriarProdutos', data, {
 
             })
-            toast.success(resposta.data.dados)
+            toast.success('Enviado com Sucesso')
+            console.log(resposta)
 
         } catch (err) {
             console.log(err)
+            
         }
 
         setNome('')
@@ -113,11 +113,11 @@ export default function Produtos() {
                         value={preco}
                         onChange={(e) => setPreco(e.target.value)}
                     />
-                    
+
                     <label>Imagem:</label>
                     <input
                         type="file"
-                        value={setImagem}
+
                         accept='image/jpeg, image/png'
                         onChange={handleImagem}
                     />

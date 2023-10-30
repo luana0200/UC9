@@ -24,6 +24,7 @@ export function isAutenticado(
             token,
             process.env.JWT_SECRET
         ) as AuthT
+        req.user_id = sub
         return next()
     } catch (err) {
         // return res.status(401).end
