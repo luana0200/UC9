@@ -14,11 +14,12 @@ export default function Login() {
 
     async function handleLogin(e) {
         e.preventDefault()
-        let data = { email, password }
+        let data = {
+            email,
+            password
+        }
 
         const resposta = await signIn(data)
-        // const token = resposta.data.token
-        // localStorage.setItem('@tklogin2023', JSON.stringify(token)) //stringify= para converter em string
 
         if (!resposta) {
             toast.error('Erro de Login')

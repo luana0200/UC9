@@ -12,11 +12,12 @@ export default function AuthProvider({ children }) {
     // const [token, setToken] = useState('')
 
     const isAutenticated = !!user
-    
+
     const iToken = localStorage.getItem('@tklogin2023')
     const token = JSON.parse(iToken)
 
     async function loginToken() { //verifica se o token é valido
+
         try {
             const resposta = await apiLocal.get('/ListarUsuarioToken', {
                 headers: {
@@ -25,9 +26,10 @@ export default function AuthProvider({ children }) {
             })
             console.log(resposta)
         } catch (err) {
-
+            console.log(err)
         }
     }
+
 
 
     // se utiliza as chaves para DESCONSTRUIR os arquivos json para usar as informações dentro dele
