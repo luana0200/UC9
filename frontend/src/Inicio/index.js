@@ -1,6 +1,7 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
+import apiLocal from '../API/apiLocal/api'
 import { AuthContext } from '../Contexts/AuthContext'
 import './inicio.estilo.scss'
 
@@ -11,6 +12,31 @@ export default function Login() {
     const [password, setPassword] = useState('')
 
     const { signIn } = useContext(AuthContext)
+
+    const iToken = localStorage.getItem('@tklogin2023')
+    const token = JSON.parse(iToken)
+
+    useEffect(() => {
+        if (!token) { //se token for vazio(falso) ent continua na tela de login
+            navigation('/')
+            return
+        } else if (token) { //se token for verdadeiro ent ele vai consultar o back para ver se é valido
+            async function verificaToken() {
+                const resposta = await apiLocal.get('/ListarUsuarioToken', {
+                    headers: {
+                        Authorization: 'Bearer ' + `${token}`
+                    }
+                })
+                if (resposta.data.dados) {
+                    navigation('/')
+                    // alert('Token Inválido')
+                    return
+                }
+                // console.log(resposta) //para verificar como recebo a informaç~qo quando nao tem token 
+            }
+            verificaToken()
+        }
+    }, [])
 
     async function handleLogin(e) {
         e.preventDefault()

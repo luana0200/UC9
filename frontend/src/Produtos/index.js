@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import { toast } from 'react-toastify'
+import { useNavigate } from 'react-router-dom'
 import apiLocal from '../API/apiLocal/api'
 import './produto.estilo.scss'
 
 export default function Produtos() {
+    const navigation = useNavigate()
 
     const [categorias, setCategorias] = useState([''])
     const [nome, setNome] = useState('')
@@ -16,6 +18,30 @@ export default function Produtos() {
 
     const iToken = localStorage.getItem('@tklogin2023')  // pegando o token
     const token = JSON.parse(iToken)
+
+    useEffect(() => {
+
+        if (!token) {
+            navigation('/')
+            return
+        } else if (token) {
+            async function verificaToken() {
+                const resposta = await apiLocal.get('/ListarUsuarioToken', {
+                    headers: {
+                        Authorization: 'Bearer ' + `${token}`
+                    }
+                })
+
+                if (resposta.data.dados) {
+                    navigation('/')
+                    return
+                }
+
+                console.log(resposta)
+            }
+            verificaToken()
+        }
+    }, [])
 
     useEffect(() => {
         async function listarCategorias() {
@@ -61,7 +87,7 @@ export default function Produtos() {
 
         } catch (err) {
             console.log(err)
-            
+
         }
 
         setNome('')

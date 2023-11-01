@@ -32,7 +32,7 @@ class LoginServices {
             process.env.JWT_SECRET, //jwt_secret vem da hash do env
             {
                 subject: usuario.id,
-                expiresIn: "2h"
+                expiresIn: 10000000
             }
         )
 

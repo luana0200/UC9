@@ -13,6 +13,7 @@ import { LoginController } from './controller/Login/LoginController'
 import { ListarCategoriasController } from './controller/Categorias/ListarCategoriasController'
 import { ListarProdutosController } from './controller/Produtos/ListarProdutosController'
 import { ListarUsuarioTokenController } from './controller/Usuarios/ListarUsuarioTokenController'
+import { DeleteUsuarioTokenController } from './controller/Usuarios/DeleteUsuarioTokenController'
 
 
 const router = Router()
@@ -24,6 +25,7 @@ router.post('/LoginUsuarios', new LoginController().handle)
 //usuarios
 router.post('/CriarUsuarios', new CriarUsuariosController().handle)
 router.get('/ListarUsuarioToken', isAutenticado, new ListarUsuarioTokenController().handle)
+router.delete('/DeleteUsuarioToken', new DeleteUsuarioTokenController().handle)
 
 //categorias
 router.post('/CriarCategorias', isAutenticado, new CriarCategoriasController().handle)
