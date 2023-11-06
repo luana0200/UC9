@@ -20,7 +20,6 @@ export default function Produtos() {
     const token = JSON.parse(iToken)
 
     useEffect(() => {
-
         if (!token) {
             navigation('/')
             return

@@ -1,7 +1,7 @@
 import { useContext, useEffect } from 'react'
 import { json, Link, useNavigate } from 'react-router-dom'
 import apiLocal from '../API/apiLocal/api'
-import { AuthContext } from '../Contexts/AuthContext'
+// import { AuthContext } from '../Contexts/AuthContext'
 
 export default function Dashboard() {
     const navigation = useNavigate()
@@ -20,7 +20,7 @@ export default function Dashboard() {
                         Authorization: 'Bearer ' + `${token}`
                     }
                 })
-                
+
                 if (resposta.data.dados) {
                     navigation('/')
                     return
@@ -32,13 +32,11 @@ export default function Dashboard() {
     }, [])
 
 
-    async function deleteToken() {
-
-    }
     return (
         <div>
             <h1>Dashboard</h1>
-            <Link to='/Produtos'>Cadastrar Produtos</Link>
+            <Link to='/Produtos'>Cadastrar Produtos</Link> <br/>
+            <Link to='/Categorias'>Cadastrar Categorias</Link>
 
 
         </div>
