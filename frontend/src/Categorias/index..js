@@ -38,37 +38,35 @@ export default function Categorias() {
         }
     }, [])
 
-    async function cadatroCategoria(e) {
-        e.preventDefault()
-        if (nome === '') {
-            toast.error('Campos em Branco não são Permitidos')
-            return
-        }
-        apiLocal.post('/CriarCategorias', {
-            nome
-            
-        })
-        toast.success('Cadastro Feito com Sucesso')
-    }
     // async function cadatroCategoria(e) {
-    //     try {
-    //         e.preventDefault()
-    //         if (nome === '') {
-    //             toast.error('Campos em Branco não são Permitidos')
-    //             return
-    //         }
-    //         const resposta = await apiLocal.post('/CriarCategorias', {
-    //             nome
-    //         })
-    //         toast.success('Enviado com Sucesso')
-    //         console.log(resposta)
-
-    //     } catch (err) {
-    //         console.log(err)
+    //     e.preventDefault()
+    //     if (nome === '') {
+    //         toast.error('Campos em Branco não são Permitidos')
+    //         return
     //     }
+    //     apiLocal.post('/CriarCategorias', {
+    //         nome
 
-    //     setNome('')
+    //     })
+    //     toast.success('Cadastro Feito com Sucesso')
     // }
+    async function cadatroCategoria(e) {
+        try {
+            e.preventDefault()
+            if (nome === '') {
+                toast.error('Campos em Branco não são Permitidos')
+                return
+            }
+            const resposta = await apiLocal.post('/CriarCategorias', {
+                nome
+            })
+            toast.success('Enviado com Sucesso')
+            console.log(resposta)
+
+        } catch (err) {
+            console.log(err)
+        }
+    }
 
 
     return (
