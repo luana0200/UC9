@@ -15,6 +15,7 @@ export default function AuthProvider({ children }) {
 
     const iToken = localStorage.getItem('@tklogin2023')
     const token = JSON.parse(iToken)
+    
     async function loginToken() { //verifica se o token é valido
 
         try {

@@ -79,23 +79,15 @@ export default function Produtos() {
             data.append('file', imagem)
 
             const resposta = await apiLocal.post('/CriarProdutos', data, {
-
+             
             })
-            toast.success('Enviado com Sucesso')
+            // toast.success('Enviado com Sucesso')
             console.log(resposta)
 
         } catch (err) {
             console.log(err)
 
         }
-
-        setNome('')
-        setFabricante('')
-        setQuantidade('')
-        setPreco('')
-        setImagem(null)
-
-
     }
 
     return (

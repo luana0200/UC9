@@ -1,8 +1,8 @@
 import React, { useState, useContext, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
-import apiLocal from '../API/apiLocal/api'
 import { AuthContext } from '../Contexts/AuthContext'
+import apiLocal from '../API/apiLocal/api'
 import './inicio.estilo.scss'
 
 export default function Login() {
@@ -50,6 +50,7 @@ export default function Login() {
         if (!resposta) {
             toast.error('Erro de Login')
             return
+            
         } else if (resposta.status === 200) {
             const token = resposta.data.token
             localStorage.setItem('@tklogin2023', JSON.stringify(token)) //stringify= para converter em string

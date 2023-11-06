@@ -14,7 +14,7 @@ export function isAutenticado(
 
     if (!authToken) {
         // return res.status(401).end
-        return res.json({ dados: 'Token Invalido' })
+        return res.json({ dados: 'Token BBBBBBBBBBBBBB Invalido' })
     }
 
     const [, token] = authToken.split(' ') //split quebra o array em posicoes
@@ -28,7 +28,7 @@ export function isAutenticado(
         return next()
     } catch (err) {
         // return res.status(401).end
-        return res.json({ dados: 'Token Invalido' })
+        return res.json({ dados: 'Token  Invalido' })
     }
 
 }

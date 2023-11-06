@@ -10,11 +10,11 @@ export default function Categorias() {
     const navigation = useNavigate()
 
     const [nome, setNome] = useState('')
+    
+            const iToken = localStorage.getItem('@tklogin2023')  // pegando o token
+            const token = JSON.parse(iToken)
 
     useEffect(() => {
-
-        const iToken = localStorage.getItem('@tklogin2023')  // pegando o token
-        const token = JSON.parse(iToken)
 
         if (!token) {
             navigation('/')
@@ -36,35 +36,21 @@ export default function Categorias() {
             }
             verificaToken()
         }
-    }, [])
+    }, [token])
 
-    // async function cadatroCategoria(e) {
-    //     e.preventDefault()
-    //     if (nome === '') {
-    //         toast.error('Campos em Branco não são Permitidos')
-    //         return
-    //     }
-    //     apiLocal.post('/CriarCategorias', {
-    //         nome
+    async function cadastroCategoria(e) {
 
-    //     })
-    //     toast.success('Cadastro Feito com Sucesso')
-    // }
-    async function cadatroCategoria(e) {
         try {
             e.preventDefault()
-            if (nome === '') {
-                toast.error('Campos em Branco não são Permitidos')
-                return
-            }
             const resposta = await apiLocal.post('/CriarCategorias', {
                 nome
             })
-            toast.success('Enviado com Sucesso')
-            console.log(resposta)
+
+            console.log(token)
+            return resposta
 
         } catch (err) {
-            console.log(err)
+
         }
     }
 
@@ -76,7 +62,7 @@ export default function Categorias() {
             </div>
 
             <div>
-                <form onSubmit={cadatroCategoria}>
+                <form onSubmit={cadastroCategoria}>
                     <label>Nome:</label>
                     <input type='text'
                         value={nome}

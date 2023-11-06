@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import Inicio from './Inicio/index'
 import Dashboard from './Dashboard/index'
 import Produtos from './Produtos/index'
-import Categorias from './Categorias/index.'
+import Categorias from './Categorias/index'
 
 
 export default function Rotas() {
