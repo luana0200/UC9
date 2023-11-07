@@ -10,9 +10,9 @@ export default function Categorias() {
     const navigation = useNavigate()
 
     const [nome, setNome] = useState('')
-    
-            const iToken = localStorage.getItem('@tklogin2023')  // pegando o token
-            const token = JSON.parse(iToken)
+
+    const iToken = localStorage.getItem('@tklogin2023')  // pegando o token
+    const token = JSON.parse(iToken)
 
     useEffect(() => {
 
@@ -39,20 +39,25 @@ export default function Categorias() {
     }, [token])
 
     async function cadastroCategoria(e) {
-
         try {
             e.preventDefault()
-            const resposta = await apiLocal.post('/CriarCategorias', {
-                nome
+
+            const response = await apiLocal.post('/CriarCategorias', {
+
+                headers: {
+                    Authorization: 'Bearer ' + `${token}`
+                }, nome
             })
 
-            console.log(token)
-            return resposta
+            // toast.success('Enviado com Sucesso')
+            console.log(response)
 
         } catch (err) {
+            // console.log(err)
 
         }
     }
+
 
 
     return (
@@ -66,9 +71,8 @@ export default function Categorias() {
                     <label>Nome:</label>
                     <input type='text'
                         value={nome}
-                        onChange={(e) => setNome(e.target.value)} />
-
-                    <br />
+                        onChange={(e) => setNome(e.target.value)}
+                    />
                     <button type='submit'>Enviar</button>
                 </form>
             </div>

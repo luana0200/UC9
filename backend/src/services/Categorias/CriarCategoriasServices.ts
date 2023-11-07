@@ -6,15 +6,15 @@ interface CriarCategorias {
 
 class CriarCategoriasServices {
     async execute({ nome }: CriarCategorias) {
-        const CateCadastrado = await prismaClient.produtos.findFirst({
-            where:{
-                nome:nome
+        const CateCadastrado = await prismaClient.categorias.findFirst({
+            where: {
+                nome: nome
             }
         })
 
-        if (CateCadastrado){
+        if (CateCadastrado) {
             throw new Error('Este Nome já esta Cadastrado')
-        } 
+        }
 
         const resposta = await prismaClient.categorias.create({
             data: {
@@ -22,7 +22,7 @@ class CriarCategoriasServices {
             }
         })
 
-       return resposta
+        return resposta
     }
 }
 
