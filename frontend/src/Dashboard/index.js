@@ -6,9 +6,14 @@ import apiLocal from '../API/apiLocal/api'
 export default function Dashboard() {
     const navigation = useNavigate()
 
-    useEffect(() => {
-        const iToken = localStorage.getItem('@tklogin2023')
-        const token = JSON.parse(iToken)
+    function handleSair() {  //acionada atraves do botao (evento)
+        localStorage.removeItem('@tklogin2023') //apagar o token
+        navigation('/')
+    }
+
+    const iToken = localStorage.getItem('@tklogin2023')
+    const token = JSON.parse(iToken)
+    useEffect(() => {  //ciclo de vida
 
         if (!token) {
             navigation('/')
@@ -29,15 +34,15 @@ export default function Dashboard() {
             }
             verificaToken()
         }
-    }, [])
+    }, [token])
 
 
     return (
         <div>
             <h1>Dashboard</h1>
-            <Link to='/Produtos'>Cadastrar Produtos</Link> <br/>
-            <Link to='/Categorias'>Cadastrar Categorias</Link>
-
+            <Link to='/Produtos'>Cadastrar Produtos</Link> <br />
+            <Link to='/Categorias'>Cadastrar Categorias</Link> <br />
+            <button onClick={handleSair}>Sair</button>
 
         </div>
     )

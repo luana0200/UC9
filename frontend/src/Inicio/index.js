@@ -1,7 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
-import { AuthContext } from '../Contexts/AuthContext'
 import apiLocal from '../API/apiLocal/api'
 import './inicio.estilo.scss'
 
@@ -10,8 +9,6 @@ export default function Login() {
     const navigation = useNavigate()
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-
-    const { signIn } = useContext(AuthContext)
 
     const iToken = localStorage.getItem('@tklogin2023')
     const token = JSON.parse(iToken)
@@ -38,25 +35,31 @@ export default function Login() {
         }
     }, [])
 
-    async function handleLogin(e) {
+    async function handleLogin(e) { // faznedo sem o AUTHCONTEXT
         e.preventDefault()
-        let data = {
-            email,
-            password
+        if (!email || !password) {            // diminui o trafego
+            toast.warn('Existem Campos em Branco')
         }
 
-        const resposta = await signIn(data)
+        try {
+            const resposta = await apiLocal.post('/LoginUsuarios', {  //indo para o banco de dados
+                email,
+                password
+            })
 
-        if (!resposta) {
-            toast.error('Erro de Login')
-            return
-            
-        } else if (resposta.status === 200) {
-            const token = resposta.data.token
-            localStorage.setItem('@tklogin2023', JSON.stringify(token)) //stringify= para converter em string
-            toast.success('Login Efetuado com Sucesso')
-            navigation('/Dashboard')
+            if (resposta.data.id) {  //pega o id
+                const token = resposta.data.token  //pega o token
+                localStorage.setItem('@tklogin2023', JSON.stringify(token)) //armazena no localstorage o token  //JSON.stringify= tramforma o token em string
+                toast.success('Login Efetuado com Sucesso')
+                navigation('/Dashboard')
+            }
+
+        } catch (err) {
+            console.log('erro')
+            // console.log(err.response.data.err)
         }
+
+
     }
 
     return (

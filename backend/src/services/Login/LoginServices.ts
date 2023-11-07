@@ -9,19 +9,35 @@ interface LoginUsuarios {
 
 class LoginServices {
     async execute({ email, password }: LoginUsuarios) {
+        // const usuario = await prismaClient.usuario.findFirst({
+        //     where: {
+        //         email: email
+        //     }
+        // })
+        // // console.log(usuario)
+
+        // if (!usuario) {
+        //     throw new Error ('Usuário/Senha Incorretos')
+        // }
+
+        // const autenticado = await compare(password, usuario.senha)//cryptografa a senha 
+
+        // if (!autenticado) {
+        //     throw new Error('Usuário/Senha Incorretos')
+        // }
+
+
         const usuario = await prismaClient.usuario.findFirst({
             where: {
                 email: email
             }
         })
-
         if (!usuario) {
-            throw new Error('Usuário/Senha Incorretos')
+            throw new Error('Usuario/Senha estão incorretos')
         }
-
-        const autenticado = await compare(password, usuario.senha)//cryptografa a senha 
+        const autenticado = await compare(password, usuario.senha)
         if (!autenticado) {
-            throw new Error('Usuário/Senha Incorretos')
+            throw new Error('Usuario/Senha estão incorretos')
         }
 
         //criando o token
