@@ -12,8 +12,8 @@ export default function Produtos() {
     const [fabricante, setFabricante] = useState('')
     const [quantidade, setQuantidade] = useState('')
     const [preco, setPreco] = useState('')
-
     const [idCategoria, setIdCategoria] = useState('')
+
     const [imagem, setImagem] = useState(null)
 
     const iToken = localStorage.getItem('@tklogin2023')  // pegando o token
